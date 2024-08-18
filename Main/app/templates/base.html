@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+
+  <!-- 引入 CSS -->
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+  <link rel="stylesheet" href="{{ url_for('static', filename='css/boorstrap-icon.min.css') }}">
+  {% block css %}{% endblock %}
+
+  <!-- Title -->
+  <title>{% block title %}{% endblock %}</title>
+  <style>
+    nav{
+      width: 100%;
+      display: flex;
+      align-items: center;
+      background-color: #1b1b1b;
+      padding: 1rem;
+      padding-right: 1.3rem;
+    }
+    nav .navbar{
+      flex: 1;
+      display: flex;
+      align-items: center;
+    }
+    nav .nav-link,
+    nav .account
+    {
+      font-size: 1.3rem;
+      text-wrap: nowrap;
+      color: #fff;
+      padding: 0 0.66rem;
+      transition: .1s ease-in;
+    }
+    nav .nav-link:hover{
+      color: #ddd;
+    }
+  </style>
+</head>
+
+<body>
+    <nav>
+        <div class="navbar">
+            <a href="/" class="nav-link">Home</a>
+            <a href="/protect" class="nav-link">protect</a>
+        </div>
+        {% if current_user.is_authenticated %}
+        <a class="nav-link" href="/">Hi {{current_user.id}}</a>
+        <a class="nav-link" href="/logout">登出</a>
+        {% else %}
+        <a class="nav-link" href="/login">登入</a>
+        <a class="nav-link" href="/signup">註冊</a>
+        {% endif %}
+    </nav>
+
+  <main>
+    {% block main %}{% endblock %}
+  </main>
+
+  {% block script %}{% endblock %}
+</body>
+</html>

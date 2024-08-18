@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Home{% endblock %}
+{% block css %}
+<style>
+#app{
+  width: 100%;
+  height: 100%;
+}
+.form{
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  padding: 0.66rem;
+}
+.form h2{
+  font-size: 4rem;
+  font-weight: 600;
+  margin-bottom: 1.33rem;
+}
+.form form .row{
+  font-size: 1.1rem;
+  margin-bottom: 1.33rem;
+  display: flex;
+  align-items: center;
+  gap: 0.66rem;
+}
+.form form .row label{
+  font-size: 1.7rem;
+  font-weight: 600;
+}
+.form form .row input{
+  padding: 0.66rem;
+  font-size: 1.3rem;
+}
+.form form input[type=submit]{
+  background-color: var(--color-blue);
+  color: #fff;
+  padding: 0.66rem;
+}
+</style>
+{% endblock %}
+{% block main %}
+<div id="app">
+  <!-- {% block flash %}
+  <div class = 'alert alert-warning'>
+    {% for message in messages %}
+      {{ message }}
+    {% endfor %}
+  </div>
+  {% endblock %} -->
+  
+  {% with messages = get_flashed_messages(with_categories=true) %}
+    {% if messages %}
+    {% for category,message in messages %}
+    <div class = 'alert {{category}}'>
+      {{ message }}
+    </div>
+    {% endfor %}
+    {% endif %}
+  {% endwith %}
+  <div class="form">
+    <h2>Login</h2>
+    <form action='login' method='POST'>
+      <div class="rows">
+        <div class="row">
+          <label for="account">工號</label>
+          <input type='text' name='account' id='account' placeholder='account'/>
+        </div>
+        <div class="row">
+          <label for="password">密碼</label>
+          <input type='password' name='password' id='password' placeholder='password'/>
+        </div>
+      </div>
+      <input type='submit' name='submit' value="登入"/>
+    </form>
+  </div>
+</div>
+{% endblock %}
